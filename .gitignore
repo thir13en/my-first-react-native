@@ -264,3 +264,6 @@ DerivedData/
 
 # IDE config files
 .idea/
+
+# environment vars
+src/environments/environment.js
