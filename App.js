@@ -1,6 +1,7 @@
 // react and native
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { firebaseConfig } from 'src/environments/environment';
 
 // vendor libs
 import firebase from 'firebase';
@@ -12,15 +13,15 @@ import LoginForm from './src/public/components/LoginForm';
 export default class App extends Component {
   componentWillMount() {
     // init firebase
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCGY0qMPfRTfkCXTjU9HWOFracxRKd8tyQ',
-      authDomain: 'auth-fbbfd.firebaseapp.com',
-      databaseURL: 'https://auth-fbbfd.firebaseio.com',
-      projectId: 'auth-fbbfd',
-      storageBucket: 'auth-fbbfd.appspot.com',
-      messagingSenderId: '135024820295'
+    const fbConfig = {
+      apiKey: firebaseConfig.apiKey,
+      authDomain: firebaseConfig.authDomain,
+      databaseURL: firebaseConfig.databaseURL,
+      projectId: firebaseConfig.projectId,
+      storageBucket: firebaseConfig.storageBucket,
+      messagingSenderId: firebaseConfig.messagingSenderId
     };
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(fbConfig);
   }
 
   render() {
