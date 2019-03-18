@@ -13,6 +13,8 @@ import Header from './src/components/Header';
 import LoginForm from './src/public/components/LoginForm';
 
 export default class App extends Component {
+  state = { loggedIn: false };
+
   componentWillMount() {
     // init firebase
     const fbConfig = {
@@ -24,6 +26,14 @@ export default class App extends Component {
       messagingSenderId: firebaseConfig.messagingSenderId
     };
     firebase.initializeApp(fbConfig);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
   }
 
   render() {
