@@ -1,10 +1,12 @@
 // react and native
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { firebaseConfig } from 'src/environments/environment';
 
 // vendor libs
 import firebase from 'firebase';
+
+// environments
+import { firebaseConfig } from './src/environments/environment';
 
 // components
 import Header from './src/components/Header';
