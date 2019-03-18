@@ -6,18 +6,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 
 // components
-import Header from './components/Header'
+import Header from './components/Header';
+import LoginForm from './public/components/LoginForm';
 
 export default class App extends Component {
   componentWillMount() {
     // init firebase
     const firebaseConfig = {
-      apiKey: "AIzaSyCGY0qMPfRTfkCXTjU9HWOFracxRKd8tyQ",
-      authDomain: "auth-fbbfd.firebaseapp.com",
-      databaseURL: "https://auth-fbbfd.firebaseio.com",
-      projectId: "auth-fbbfd",
-      storageBucket: "auth-fbbfd.appspot.com",
-      messagingSenderId: "135024820295"
+      apiKey: 'AIzaSyCGY0qMPfRTfkCXTjU9HWOFracxRKd8tyQ',
+      authDomain: 'auth-fbbfd.firebaseapp.com',
+      databaseURL: 'https://auth-fbbfd.firebaseio.com',
+      projectId: 'auth-fbbfd',
+      storageBucket: 'auth-fbbfd.appspot.com',
+      messagingSenderId: '135024820295'
     };
     firebase.initializeApp(firebaseConfig);
   }
@@ -25,8 +26,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header headerText="Authentication" />
-        <Text>Open up App.js to start working on your app!</Text>
+        <Header headerText='Authentication' />
+        <LoginForm />
       </View>
     );
   }
