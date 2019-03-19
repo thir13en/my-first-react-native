@@ -1,9 +1,11 @@
 // react and native
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Provider } from 'react-redux';
 
 // vendor libs
 import firebase from 'firebase';
+import { createStore } from 'redux';
 
 // environments
 import { firebaseConfig } from './src/environments/environment';
@@ -61,10 +63,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-        <Header headerText="Authentication" />
-        {this.renderContent()}
-      </View>
+      <Provider store={createStore}>
+        <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+          <Header headerText="Authentication" />
+          {this.renderContent()}
+        </View>
+      </Provider>
     );
   }
 }
