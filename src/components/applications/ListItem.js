@@ -1,17 +1,38 @@
+// react stuff
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import CardSection from '../shared/CardSection';
+import * as actions from '../../store/actions';
 
 class ListItem extends Component {
+  renderDescription() {
+    const { library, selectedLibraryId } = this.props;
+    if (library.item.id === selectedLibraryId) {
+      return (
+        <Text>{library.item.description}</Text>
+      );
+    }
+    return null;
+  }
+
   render() {
-    const { library } = this.props;
+    const { library, SelectLibrary } = this.props;
+    const { id, title } = library.item;
     const { titleStyle } = styles;
 
     return (
-      <CardSection>
-        <Text style={titleStyle}>{library.item.title}</Text>
-      </CardSection>
+      <TouchableWithoutFeedback
+        onPress={() => SelectLibrary(id)}
+      >
+        <View>
+          <CardSection>
+            <Text style={titleStyle}>{title}</Text>
+          </CardSection>
+          {this.renderDescription()}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -23,4 +44,6 @@ const styles = {
   }
 };
 
-export default ListItem;
+const mapStateToProps = state => ({ selectedLibraryId: state.selectedLibraryId });
+
+export default connect(mapStateToProps, actions)(ListItem);

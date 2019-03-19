@@ -11,7 +11,7 @@ import { createStore } from 'redux';
 import { firebaseConfig } from './src/environments/environment';
 
 // redux stuff
-import reducers from './src/reducers';
+import reducers from './src/store/reducers';
 
 // components
 import { Header, Button, Spinner } from './src/components/shared';
