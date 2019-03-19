@@ -9,9 +9,8 @@ import firebase from 'firebase';
 import { firebaseConfig } from './src/environments/environment';
 
 // components
-import { Header, Button } from './src/components';
+import { Header, Button, Spinner } from './src/components';
 import LoginForm from './src/public/components/LoginForm';
-import Spinner from "./src/components/Spinner";
 
 export default class App extends Component {
   state = { loggedIn: null };
@@ -43,23 +42,37 @@ export default class App extends Component {
     switch (loggedIn) {
       case true:
         return (
-          <Button>
-            Log Out
-          </Button>
+          <View style={{ height: 44 }}>
+            <Button onPress={() => firebase.auth().signOut()}>
+              Log Out
+            </Button>
+          </View>
         );
       case false:
         return <LoginForm />;
       default:
-        return <Spinner size="large" />;
+        return (
+          <View style={styles.loaderContainerStyle}>
+            <Spinner size="large" />
+          </View>
+        );
     }
   }
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1, justifyContent: 'flex-start' }}>
         <Header headerText="Authentication" />
         {this.renderContent()}
       </View>
     );
   }
 }
+
+const styles = {
+  loaderContainerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+};
