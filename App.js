@@ -16,6 +16,7 @@ import reducers from './src/reducers';
 // components
 import { Header, Button, Spinner } from './src/components/shared';
 import LoginForm from './src/components/public/LoginForm';
+import LibraryList from './src/components/applications/LibraryList';
 
 export default class App extends Component {
   state = { loggedIn: null };
@@ -47,10 +48,11 @@ export default class App extends Component {
     switch (loggedIn) {
       case true:
         return (
-          <View style={{ height: 44 }}>
+          <View>
             <Button onPress={() => firebase.auth().signOut()}>
               Log Out
             </Button>
+            <LibraryList />
           </View>
         );
       case false:
