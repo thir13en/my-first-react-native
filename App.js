@@ -9,11 +9,12 @@ import firebase from 'firebase';
 import { firebaseConfig } from './src/environments/environment';
 
 // components
-import Header from './src/components/Header';
+import { Header, Button } from './src/components';
 import LoginForm from './src/public/components/LoginForm';
+import Spinner from "./src/components/Spinner";
 
 export default class App extends Component {
-  state = { loggedIn: false };
+  state = { loggedIn: null };
 
   componentWillMount() {
     // init firebase
@@ -36,11 +37,28 @@ export default class App extends Component {
     });
   }
 
+  renderContent() {
+    const { loggedIn } = this.state;
+
+    switch (loggedIn) {
+      case true:
+        return (
+          <Button>
+            Log Out
+          </Button>
+        );
+      case false:
+        return <LoginForm />;
+      default:
+        return <Spinner size="large" />;
+    }
+  }
+
   render() {
     return (
       <View>
         <Header headerText="Authentication" />
-        <LoginForm />
+        {this.renderContent()}
       </View>
     );
   }
