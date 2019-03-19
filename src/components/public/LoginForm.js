@@ -9,7 +9,7 @@ import {
   Card,
   CardSection,
   Spinner
-} from '../../components';
+} from '../shared';
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false };

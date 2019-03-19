@@ -10,9 +10,12 @@ import { createStore } from 'redux';
 // environments
 import { firebaseConfig } from './src/environments/environment';
 
+// redux stuff
+import reducers from './src/reducers';
+
 // components
-import { Header, Button, Spinner } from './src/components';
-import LoginForm from './src/public/components/LoginForm';
+import { Header, Button, Spinner } from './src/components/shared';
+import LoginForm from './src/components/public/LoginForm';
 
 export default class App extends Component {
   state = { loggedIn: null };
@@ -63,9 +66,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore}>
+      <Provider store={createStore(reducers)}>
         <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-          <Header headerText="Authentication" />
+          <Header headerText="Tech Stack" />
           {this.renderContent()}
         </View>
       </Provider>
