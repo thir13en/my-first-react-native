@@ -1,9 +1,13 @@
-const INITIAL_STATE = null;
+const INITIAL_STATE = { selectedLibraryId: null };
 
 export default (state = INITIAL_STATE, action) => {
+  console.log(state);
   switch (action.type) {
     case 'select_library':
-      return action.payload;
+      return {
+        ...state,
+        selectedLibraryId: action.payload
+      };
     default:
       return state;
   }
