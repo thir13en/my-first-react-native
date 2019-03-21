@@ -1,4 +1,4 @@
-# seg-react-native
+# My-first-react-native
 
 A simple app using React Native, Redux, Firebase. It works on both iOS and Android.
 
