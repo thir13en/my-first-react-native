@@ -7,32 +7,25 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import { createStore } from 'redux';
 
-// environments
-import { firebaseConfig } from './src/environments/environment';
-
 // redux stuff
 import reducers from './src/store/reducers';
+
+// set up
+import configureStore from './src/store/configureStore';
+import firebaseConfig from './firebase.config';
 
 // components
 import { Header, Button, Spinner } from './src/components/shared';
 import LoginForm from './src/components/public/LoginForm';
-import LibraryList from './src/components/applications/LibraryList';
+import LibraryList from './src/components/applications/LibraryList/LibraryList';
+
+const store = configureStore();
 
 export default class App extends Component {
   state = { loggedIn: null };
 
   componentWillMount() {
-    // init firebase
-    const fbConfig = {
-      apiKey: firebaseConfig.apiKey,
-      authDomain: firebaseConfig.authDomain,
-      databaseURL: firebaseConfig.databaseURL,
-      projectId: firebaseConfig.projectId,
-      storageBucket: firebaseConfig.storageBucket,
-      messagingSenderId: firebaseConfig.messagingSenderId
-    };
-    firebase.initializeApp(fbConfig);
-
+    firebase.initializeApp(firebaseConfig);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ loggedIn: true });
@@ -67,8 +60,6 @@ export default class App extends Component {
   }
 
   render() {
-    const store = createStore(reducers);
-    // store.subscribe(() => console.log(store.getState().selectedLibraryId));
     return (
       <Provider store={store}>
         <View style={{ flex: 1, justifyContent: 'flex-start' }}>

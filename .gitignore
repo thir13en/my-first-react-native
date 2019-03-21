@@ -265,5 +265,5 @@ DerivedData/
 # IDE config files
 .idea/
 
-# environment vars
-src/environments/environment.js
+# files with sensitive information
+firebase.config.js

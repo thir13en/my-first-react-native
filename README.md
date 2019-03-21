@@ -25,10 +25,10 @@ yarn install
 Configure:
 
 ```bash
-cp config.js.example config.js
+cp firebase.config.js.dist firebase.config.js
 ```
 
-Update config.js with your Firebase app credentials.
+Update firebase.config.js with your Firebase app credentials.
 
 ## Develop
 

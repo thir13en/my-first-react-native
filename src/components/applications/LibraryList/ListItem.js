@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import CardSection from '../shared/CardSection';
-import * as actions from '../../store/actions';
-import selectedLibrary from '../../store/reducers/SelectionReducer';
+import CardSection from '../../shared/CardSection';
+import * as actions from '../../../store/actions';
+import selectedLibrary from '../../../store/reducers/SelectionReducer';
 
 class ListItem extends Component {
   renderDescription() {
