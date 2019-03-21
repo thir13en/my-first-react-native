@@ -12,6 +12,7 @@ import { Header, Button, Spinner } from './src/components/shared';
 import LoginForm from './src/components/public/LoginForm';
 import LibraryList from './src/components/applications/LibraryList/LibraryList';
 
+// init redux store
 const store = configureStore();
 
 export default class App extends Component {
