@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 
 import CardSection from '../shared/CardSection';
 import * as actions from '../../store/actions';
+import selectedLibrary from '../../store/reducers/SelectionReducer';
 
-const mapStateToProps = state => ({ selectedLibraryId: state.selectedLibraryId });
-
-@connect(mapStateToProps, actions)
 class ListItem extends Component {
   renderDescription() {
     const { library, selectedLibraryId } = this.props;
@@ -21,10 +19,10 @@ class ListItem extends Component {
   }
 
   render() {
-    const { library, SelectLibrary, selectedLibraryId } = this.props;
+    const { library, SelectLibrary } = this.props;
     const { id, title } = library.item;
     const { titleStyle } = styles;
-    console.log(selectedLibraryId);
+
     return (
       <TouchableWithoutFeedback
         onPress={() => SelectLibrary(id)}
@@ -47,4 +45,6 @@ const styles = {
   }
 };
 
-export default ListItem;
+const mapStateToProps = state => ({ selectedLibraryId: state.selectedLibrary.id });
+
+export default connect(mapStateToProps, actions)(ListItem);

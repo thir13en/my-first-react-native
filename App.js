@@ -67,8 +67,10 @@ export default class App extends Component {
   }
 
   render() {
+    const store = createStore(reducers);
+    // store.subscribe(() => console.log(store.getState().selectedLibraryId));
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <View style={{ flex: 1, justifyContent: 'flex-start' }}>
           <Header headerText="Tech Stack" />
           {this.renderContent()}
