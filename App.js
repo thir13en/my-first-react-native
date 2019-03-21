@@ -3,16 +3,9 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 
-// vendor libs
-import firebase from 'firebase';
-import { createStore } from 'redux';
-
-// redux stuff
-import reducers from './src/store/reducers';
-
 // set up
 import configureStore from './src/store/configureStore';
-import firebaseConfig from './firebase.config';
+import firebaseApp from './src/firebase';
 
 // components
 import { Header, Button, Spinner } from './src/components/shared';
@@ -25,8 +18,7 @@ export default class App extends Component {
   state = { loggedIn: null };
 
   componentWillMount() {
-    firebase.initializeApp(firebaseConfig);
-    firebase.auth().onAuthStateChanged((user) => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ loggedIn: true });
       } else {
@@ -42,7 +34,7 @@ export default class App extends Component {
       case true:
         return (
           <View>
-            <Button onPress={() => firebase.auth().signOut()}>
+            <Button onPress={() => firebaseApp.auth().signOut()}>
               Log Out
             </Button>
             <LibraryList />

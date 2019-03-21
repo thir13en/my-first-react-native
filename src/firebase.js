@@ -1,5 +1,5 @@
-import { initializeApp as initFirebaseApp } from 'firebase'
+import firebase from 'firebase';
 
 import config from '../firebase.config';
 
-export default initFirebaseApp(config);
+export default firebase.initializeApp(config);
