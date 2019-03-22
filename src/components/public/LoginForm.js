@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // vendor
 import firebase from 'firebase';
 
-import { EmailChanged } from '../../store/actions';
+import { EmailChanged, PasswordChanged } from '../../store/actions';
 
 import {
   Input,
@@ -17,11 +17,16 @@ import {
 } from '../shared';
 
 class LoginForm extends Component {
-  state = { email: '', password: '', error: '', loading: false };
+  state = { error: '', loading: false };
 
   onEmailChange(text) {
     const { emailChanged } = this.props;
     emailChanged(text);
+  }
+
+  onPasswordChange(psswd) {
+    const { passwordChanged } = this.props;
+    passwordChanged(psswd);
   }
 
   onButtonPress() {
@@ -79,7 +84,7 @@ class LoginForm extends Component {
             placeholder="password"
             label="Password"
             value={this.state.password}
-            onChangeText={password => this.setState({ password })}
+            onChangeText={this.onPasswordChange.bind(this)}
           />
         </CardSection>
 
@@ -103,4 +108,7 @@ const styles = {
   }
 };
 
-export default connect(null, { emailChanged: EmailChanged })(LoginForm);
+const mapStateToProps = state => ({ email: state.auth.email });
+const mapActionsToProps = () => ({ emailChanged: EmailChanged, passwordChanged: PasswordChanged });
+
+export default connect(mapStateToProps, mapActionsToProps())(LoginForm);
