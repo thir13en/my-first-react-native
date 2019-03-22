@@ -1,4 +1,6 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED } from './types';
+import {
+  EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER
+} from './types';
 import firebaseApp from '../../firebase';
 
 export const SelectLibrary = libraryId => ({
@@ -16,7 +18,15 @@ export const PasswordChanged = psswd => ({
   payload: psswd
 });
 
-export const LoginUser = ({ email, password }) => {
+export const LoginUser = (email, password) => (dispatch) => {
+  dispatch({ type: LOGIN_USER });
+
   firebaseApp.auth().signInWithEmailAndPassword(email, password)
-    .then(user => console.log(user));
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch(() => firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch(() => loginUserFail(dispatch)));
 };
+
+const loginUserSuccess = (dispatch, user) => dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+const loginUserFail = dispatch => dispatch({ type: LOGIN_USER_FAIL });

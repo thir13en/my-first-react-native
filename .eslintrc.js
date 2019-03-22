@@ -6,10 +6,11 @@ module.exports = {
     },
     'rules': {
         'no-use-before-define': 'off',
-        'react/jsx-filename-extension': 'off',
-        'react/prop-types': 'off',
         'comma-dangle': 'off',
-        'import/prefer-default-export': 'off'
+        'import/prefer-default-export': 'off',
+        'react/prop-types': 'off',
+        'react/jsx-filename-extension': 'off',
+        'react/jsx-no-bind': 'off'
     },
     'globals': {
         'fetch': false
