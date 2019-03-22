@@ -25,6 +25,7 @@ const styles = {
   buttonStyle: {
     flex: 1,
     minHeight: 44,
+    maxHeight: 44,
     backgroundColor: '#fff',
     borderRadius: 5,
     borderWidth: 1,

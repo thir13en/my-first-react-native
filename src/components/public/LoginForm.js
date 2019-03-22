@@ -1,7 +1,12 @@
+// react
 import React, { Component } from 'react';
 import { Text } from 'react-native';
+import { connect } from 'react-redux';
 
+// vendor
 import firebase from 'firebase';
+
+import { EmailChanged } from '../../store/actions';
 
 import {
   Input,
@@ -13,6 +18,11 @@ import {
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false };
+
+  onEmailChange(text) {
+    const { emailChanged } = this.props;
+    emailChanged(text);
+  }
 
   onButtonPress() {
     const { email, password } = this.state;
@@ -60,7 +70,7 @@ class LoginForm extends Component {
             placeholder="ex: user@domain.com"
             label="Email"
             value={this.state.email}
-            onChangeText={email => this.setState({ email })}
+            onChangeText={this.onEmailChange.bind(this)}
           />
         </CardSection>
         <CardSection>
@@ -93,4 +103,4 @@ const styles = {
   }
 };
 
-export default LoginForm;
+export default connect(null, { emailChanged: EmailChanged })(LoginForm);

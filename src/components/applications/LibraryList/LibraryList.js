@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import { connect } from 'react-redux';
 
 import ListItem from './ListItem';
-import { connect } from 'react-redux';
 
 
 class LibraryList extends Component {
@@ -23,11 +23,6 @@ class LibraryList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    libraries: state.libraries,
-    selectedLibraryId: state.selectedLibrary.id
-  };
-};
+const mapStateToProps = state => ({ libraries: state.libraries });
 
 export default connect(mapStateToProps)(LibraryList);

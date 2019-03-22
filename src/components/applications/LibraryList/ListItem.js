@@ -1,18 +1,38 @@
 // react stuff
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  LayoutAnimation,
+  UIManager,
+  Platform
+} from 'react-native';
 import { connect } from 'react-redux';
 
 import CardSection from '../../shared/CardSection';
 import * as actions from '../../../store/actions';
-import selectedLibrary from '../../../store/reducers/SelectionReducer';
+
 
 class ListItem extends Component {
+  componentWillMount() {
+    // necessary for layoutAnimation to work on Android
+    if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.spring();
+  }
+
   renderDescription() {
-    const { library, selectedLibraryId } = this.props;
-    if (library.item.id === selectedLibraryId) {
+    const { expanded, library } = this.props;
+    if (expanded) {
       return (
-        <Text>{library.item.description}</Text>
+        <CardSection>
+          <Text style={{ flex: 1 }}>{library.item.description}</Text>
+        </CardSection>
       );
     }
     return null;
@@ -45,6 +65,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => ({ selectedLibraryId: state.selectedLibrary.id });
+const mapStateToProps = (state, ownProps) => {
+  const expanded = state.selectedLibrary.id === ownProps.library.item.id;
+
+  return { expanded };
+};
 
 export default connect(mapStateToProps, actions)(ListItem);

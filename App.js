@@ -30,11 +30,10 @@ export default class App extends Component {
 
   renderContent() {
     const { loggedIn } = this.state;
-
     switch (loggedIn) {
       case true:
         return (
-          <View>
+          <View style={{ flex: 1 }}>
             <Button onPress={() => firebaseApp.auth().signOut()}>
               Log Out
             </Button>
